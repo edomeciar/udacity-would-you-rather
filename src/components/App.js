@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading";
@@ -14,27 +13,27 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
-
   render() {
-    
+    console.log(`Render App ${this.props.loading}`)
     return (
-      <div className={classes.root}>
+      <div className="root">
         <Router>
           <Fragment>
-            <LoadingBar />
-            <div>
-              <AppHeader />
-              <Nav />
-              {this.props.loading === true ? null : (
-                <main className={classes.content}>
-                  <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/users" component={Users} />
-                    <Route path="/newQuestion" component={NewQuestion} />
-                  </Switch>
-                </main>
-              )}
-            </div>
+            <AppHeader />
+            <main className="content">
+            <Nav />
+            
+            {this.props.loading === true ? (<div>Loading</div>) : (
+              <div>
+                <LoadingBar />
+                <Switch>
+                  <Route path="/" exact component={Home} />
+                  <Route path="/users" component={Users} />
+                  <Route path="/newQuestion" component={NewQuestion} />
+                </Switch>
+              </div>
+            )}
+            </main>
           </Fragment>
         </Router>
       </div>
@@ -44,39 +43,8 @@ class App extends Component {
 
 function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null ? true : false
   };
 }
 
 export default connect(mapStateToProps)(App);
-
-const drawerWidth = 200;
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    fontFamily: "AttAleckSans, Helvetica Neue, Helvetica, Arial, sans-serif"
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    paddingTop: theme.spacing(8)
-  },
-  toolbar: {
-    ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    paddingTop: theme.spacing(8),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
-  }
-}));
-
-const classes = useStyles();
