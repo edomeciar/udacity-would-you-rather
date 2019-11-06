@@ -6,8 +6,9 @@ import Nav from "./Nav";
 import AppHeader from "./AppHeader";
 import { handleInitialData } from "../actions/shared";
 import Users from "./Users";
-import Home from "./Home";
+import Dashboard from "./Dashboard";
 import NewQuestion from "./NewQuestion";
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
   componentDidMount() {
@@ -27,9 +28,10 @@ class App extends Component {
               <div>
                 <LoadingBar />
                 <Switch>
-                  <Route path="/" exact component={Home} />
+                  <Route path="/" exact component={Dashboard} />
                   <Route path="/users" component={Users} />
-                  <Route path="/newQuestion" component={NewQuestion} />
+                  <Route path="/add" component={NewQuestion} />
+                  <Route path="/leaderboard" component={LeaderBoard} />
                 </Switch>
               </div>
             )}

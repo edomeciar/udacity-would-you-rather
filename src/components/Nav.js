@@ -8,6 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+
+
 
 function Nav(){
     return(
@@ -23,7 +26,7 @@ function Nav(){
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button component={NavLink} to="/users">
       <ListItemIcon>
@@ -31,8 +34,13 @@ function Nav(){
       </ListItemIcon>
       <ListItemText primary="Users" />
     </ListItem>
-
-    <ListItem button component={NavLink} to="/newQuestion">
+    <ListItem button component={NavLink} to="/leaderboard">
+      <ListItemIcon>
+        <FitnessCenterIcon />
+      </ListItemIcon>
+      <ListItemText primary="Leader Board" />
+    </ListItem>
+    <ListItem button component={NavLink} to="/add">
       <ListItemIcon>
         <ContactSupportIcon />
       </ListItemIcon>
