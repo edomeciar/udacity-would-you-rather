@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -15,7 +16,13 @@ const useStyles = makeStyles({
     maxWidth: 345
   },
   media: {
-    height: 140
+    height: 70,
+    width: 70
+  },
+  headerBox:{
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center"
   }
 });
 
@@ -28,11 +35,16 @@ function UserResults({ user }) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
+        <Box  className={classes.headerBox}>
         <CardMedia
           className={classes.media}
           image={user.avatarURL}
           title="User Avatar"
         />
+        <Typography gutterBottom variant="h5" component="h2">
+          {user.name}
+        </Typography>
+        </Box>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             Score
@@ -52,7 +64,6 @@ function UserResults({ user }) {
   );
 }
 
-
 function LeaderBoard({ users }) {
   console.log(users);
   return Object.keys(users).map(userId => <UserResults user={users[userId]} />);
@@ -60,7 +71,14 @@ function LeaderBoard({ users }) {
 
 function mapStateToProps({ users }) {
   return {
-    users
+    users: Object.keys(users).sort(
+      (a, b) =>
+        users[b].questions.length +
+        Object.keys(users[b].answers).length -
+        (users[a].questions.length + Object.keys(users[a].answers).length)
+    ).map(userId => {
+        return users[userId]
+    }),
   };
 }
 
