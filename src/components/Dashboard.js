@@ -1,10 +1,14 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 import Questions from "./Questions";
 
-function Dashboard({ answeredQuestionsIds, unansweredQuestionsIds, questions }) {
+function Dashboard({
+  answeredQuestionsIds,
+  unansweredQuestionsIds,
+  questions
+}) {
   const [state, setState] = React.useState({
     answered: false,
     unanswered: true
@@ -41,14 +45,17 @@ function Dashboard({ answeredQuestionsIds, unansweredQuestionsIds, questions }) 
       />
       {state.answered === true && (
         <Fragment>
-        <h3>Answered</h3>
-        <Questions questionIds={answeredQuestionsIds} questions={questions} />
+          <h3>Answered</h3>
+          <Questions questionIds={answeredQuestionsIds} questions={questions} />
         </Fragment>
       )}
       {state.unanswered === true && (
         <Fragment>
-        <h3>Unanswered</h3>
-        <Questions questionIds={unansweredQuestionsIds} questions={questions}/>
+          <h3>Unanswered</h3>
+          <Questions
+            questionIds={unansweredQuestionsIds}
+            questions={questions}
+          />
         </Fragment>
       )}
     </div>

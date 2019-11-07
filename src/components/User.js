@@ -1,60 +1,54 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { setAuthedUser } from "../actions/authedUser";
 
-
-
 class User extends Component {
+  handleClick = () => {
+    const { user } = this.props;
+    this.props.setAuthedUser(user.id);
+  };
 
-    handleClick = () => {
-         const { user } = this.props
-         this.props.setAuthedUser(user.id);
-    }
-  
   render() {
-    const { user, authedUser } = this.props
+    const { user, authedUser } = this.props;
 
     if (user === null) {
-      return <p>This User doesn't existd</p>
+      return <p>This User doesn't existd</p>;
     }
 
-    const {
-      name, avatarURL
-    } = user
+    const { name, avatarURL } = user;
     return (
-      <button className='userCard' onClick={this.handleClick}>
-        <img
-          src={avatarURL}
-          alt={`Avatar of ${name}`}
-          className='avatar'
-        />
-        
-        <div className='user-info'>
+      <button className="userCard" onClick={this.handleClick}>
+        <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
+
+        <div className="user-info">
           <div>
             <span>{name}</span>
           </div>
-          {user.id === authedUser ? (
-              <CheckBoxIcon/>
-          ) : null}
+          {user.id === authedUser ? <CheckBoxIcon /> : null}
         </div>
       </button>
-    )
+    );
   }
 }
 
-function mapStateToProps ({authedUser, users}, { id }) {
-  const user = users[id]
+function mapStateToProps({ authedUser, users }, { id }) {
+  const user = users[id];
 
   return {
     authedUser,
     user
-  }
+  };
 }
 
 const mapDispatchToProps = {
   setAuthedUser
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(User)
+);

@@ -16,10 +16,13 @@ function NewQuestion({ createNewQuestion, authedUser }) {
   const [toHome, setToHome] = React.useState(false);
 
   function handleSubmit() {
-    createNewQuestion({
-      optionOneText: option1,
-      optionTwoText: option2
-    }, authedUser);
+    createNewQuestion(
+      {
+        optionOneText: option1,
+        optionTwoText: option2
+      },
+      authedUser
+    );
     setToHome(true);
   }
 
@@ -51,11 +54,7 @@ function NewQuestion({ createNewQuestion, authedUser }) {
             onChange={evt => setOption2(evt.target.value)}
           />
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Submit
         </Button>
       </form>

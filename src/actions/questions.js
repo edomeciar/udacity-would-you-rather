@@ -32,7 +32,7 @@ function saveQuestion(formattedQuestion) {
 export function handleSaveQuestionAnswer(qid, authedUser, answer) {
   return dispatch => {
     dispatch(showLoading());
-    return Promise.all([_saveQuestionAnswer({ authedUser,qid, answer })]).then(
+    return Promise.all([_saveQuestionAnswer({ authedUser, qid, answer })]).then(
       () => {
         dispatch(saveQuestionAnswer(authedUser, qid, answer));
         dispatch(saveUserQuestionAnswer(authedUser, qid, answer));

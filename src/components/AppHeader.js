@@ -1,13 +1,11 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { useStyles } from "./style";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-function AppHeader({
-  user
-}) {
+function AppHeader({ user }) {
   const classes = useStyles();
 
   return (
@@ -18,28 +16,28 @@ function AppHeader({
             Udacity Would You Rather
           </Typography>
           <img
-          src={user.avatarURL}
-          alt={`Avatar of ${user.name}`}
-          className='avatar'
-        />
+            src={user.avatarURL}
+            alt={`Avatar of ${user.name}`}
+            className="avatar"
+          />
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-AppHeader.defaultProps ={
-  user:{
+AppHeader.defaultProps = {
+  user: {
     avatarURL: "",
-    name: "",
+    name: ""
   }
-}
+};
 
-function mapStateToProps ({authedUser, users}) {
-  const user = users[authedUser]
+function mapStateToProps({ authedUser, users }) {
+  const user = users[authedUser];
   return {
     user
-  }
+  };
 }
 
-export default connect(mapStateToProps)(AppHeader)
+export default connect(mapStateToProps)(AppHeader);

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useStyles } from "./style"
+import { useStyles } from "./style";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -17,15 +17,15 @@ function UserResults({ user }) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <Box  className={classes.headerBox}>
-        <CardMedia
-          className={classes.media}
-          image={user.avatarURL}
-          title="User Avatar"
-        />
-        <Typography gutterBottom variant="h5" component="h2">
-          {user.name}
-        </Typography>
+        <Box className={classes.headerBox}>
+          <CardMedia
+            className={classes.media}
+            image={user.avatarURL}
+            title="User Avatar"
+          />
+          <Typography gutterBottom variant="h5" component="h2">
+            {user.name}
+          </Typography>
         </Box>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -52,14 +52,16 @@ function LeaderBoard({ users }) {
 
 function mapStateToProps({ users }) {
   return {
-    users: Object.keys(users).sort(
-      (a, b) =>
-        users[b].questions.length +
-        Object.keys(users[b].answers).length -
-        (users[a].questions.length + Object.keys(users[a].answers).length)
-    ).map(userId => {
-        return users[userId]
-    }),
+    users: Object.keys(users)
+      .sort(
+        (a, b) =>
+          users[b].questions.length +
+          Object.keys(users[b].answers).length -
+          (users[a].questions.length + Object.keys(users[a].answers).length)
+      )
+      .map(userId => {
+        return users[userId];
+      })
   };
 }
 
