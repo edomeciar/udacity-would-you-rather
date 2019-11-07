@@ -47,7 +47,7 @@ function UserResults({ user }) {
 }
 
 function LeaderBoard({ users }) {
-  return Object.keys(users).map(userId => <UserResults user={users[userId]} />);
+  return Object.keys(users).map(userId => <UserResults key={userId} user={users[userId]} />);
 }
 
 function mapStateToProps({ users }) {
