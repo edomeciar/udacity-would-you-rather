@@ -3,36 +3,13 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { handleSaveQuestion } from "../actions/questions";
 import { Redirect } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStyles } from "./style";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(3, 2),
-    width: 400
-  },
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 380
-  },
-  options: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  button: {
-    margin: theme.spacing(1)
-  }
-}));
-
-function NewQuestion({ createNewQuestion }) {
+function NewQuestion({ createNewQuestion, authedUser }) {
   const classes = useStyles();
   const [option1, setOption1] = React.useState("");
   const [option2, setOption2] = React.useState("");
@@ -42,7 +19,7 @@ function NewQuestion({ createNewQuestion }) {
     createNewQuestion({
       optionOneText: option1,
       optionTwoText: option2
-    });
+    }, authedUser);
     setToHome(true);
   }
 
@@ -51,7 +28,7 @@ function NewQuestion({ createNewQuestion }) {
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.questionPaper}>
       <Typography variant="h5" component="h3">
         Would you rather ...
       </Typography>
@@ -77,7 +54,6 @@ function NewQuestion({ createNewQuestion }) {
         <Button
           variant="contained"
           color="primary"
-          className={classes.button}
           onClick={handleSubmit}
         >
           Submit
@@ -90,9 +66,8 @@ function NewQuestion({ createNewQuestion }) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     dispatch,
-    createNewQuestion: (question, evt) => {
-      console.log("handle save", this.option1);
-      dispatch(handleSaveQuestion(question));
+    createNewQuestion: (question, authedUser, evt) => {
+      dispatch(handleSaveQuestion(question, authedUser));
     }
   };
 }

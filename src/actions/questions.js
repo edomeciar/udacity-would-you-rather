@@ -29,11 +29,10 @@ function saveQuestion(formattedQuestion) {
   };
 }
 
-export function handleSaveQuestionAnswer(qid, answer) {
-  return (dispatch, getState) => {
-    const { authedUser } = getState();
+export function handleSaveQuestionAnswer(qid, authedUser, answer) {
+  return dispatch => {
     dispatch(showLoading());
-    return Promise.all([_saveQuestionAnswer({ authedUser, qid, answer })]).then(
+    return Promise.all([_saveQuestionAnswer({ authedUser,qid, answer })]).then(
       () => {
         dispatch(saveQuestionAnswer(authedUser, qid, answer));
         dispatch(saveUserQuestionAnswer(authedUser, qid, answer));
@@ -43,9 +42,8 @@ export function handleSaveQuestionAnswer(qid, answer) {
   };
 }
 
-export function handleSaveQuestion(question) {
-  return (dispatch, getState) => {
-    const { authedUser } = getState();
+export function handleSaveQuestion(question, authedUser) {
+  return dispatch => {
     question.author = authedUser;
     dispatch(showLoading());
     return Promise.all([_saveQuestion(question)]).then(formattedQuestion => {
