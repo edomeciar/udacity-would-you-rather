@@ -36,7 +36,7 @@ AppHeader.defaultProps ={
 }
 
 function mapStateToProps ({authedUser, users}) {
-  console.log('user',user);
+  const user = users[authedUser]
   return {
     user
   }
